@@ -1,4 +1,4 @@
-# SwarmPilot — Self-Tuning Robot Swarm Simulator
+# 🤖 SwarmPilot.    Self-Tuning Robot Swarm Simulator
 
 **Live demo:** https://blip-geta22.github.io/swarm-pilot/
 *(If that link is not live yet, enable GitHub Pages for this repo: Settings → Pages → Deploy from branch `main`, folder `/docs`, then wait about a minute.)*
