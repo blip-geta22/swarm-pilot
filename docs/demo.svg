@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" style="background:#161a24;font-family:system-ui,sans-serif">
+  <text x="20" y="30" fill="#eee" font-size="22">SwarmPilot — live demo preview</text>
+  <circle cx="400" cy="260" r="60" fill="#ef4444"/>
+  <circle cx="500" cy="420" r="50" fill="#ef4444"/>
+  <circle cx="640" cy="260" r="40" fill="#ef4444"/>
+  <text x="888" y="270" fill="#22c55e" font-size="28">★</text>
+  <g fill="#818cf8">
+    <polygon points="120,200 100,215 100,185"/>
+    <polygon points="150,260 130,275 130,245"/>
+    <polygon points="180,320 160,335 160,305"/>
+    <polygon points="220,180 200,195 200,165"/>
+    <polygon points="260,300 240,315 240,285"/>
+    <polygon points="300,220 280,235 280,205"/>
+    <polygon points="340,350 320,365 320,335"/>
+    <polygon points="380,190 360,205 360,175"/>
+  </g>
+  <text x="20" y="500" fill="#aaa" font-size="14">8 robots, PID steering, obstacle avoidance — try the live demo, don't just look at this picture.</text>
+</svg>

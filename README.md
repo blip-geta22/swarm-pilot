@@ -7,6 +7,8 @@ A swarm of autonomous robots that navigates around obstacles to a target,
 steered by PID control, kept apart by flocking rules, and tuned by a genetic
 algorithm that learns its own PID gains.
 
+![SwarmPilot demo preview](docs/demo.svg)
+
 No hardware needed. The whole thing runs in Python, and there is a live
 browser demo too.
 
