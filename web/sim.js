@@ -1,4 +1,4 @@
-// SwarmPilot simulation core - shared by the browser demo and the Node test.
+// SwarmPilot simulation core, shared by the browser demo and the Node test.
 // No DOM in here, so `node web/test_sim.js` can run the exact same physics
 // a recruiter sees in the browser. That is the point: the demo is not a fake.
 
@@ -55,7 +55,7 @@ function stepSwarm(state, dt) {
     const error = wrap(desired - r.heading) + (Math.random() - 0.5) * 0.04;
     // PID output is a *desired turn rate*, not a heading jump.
     // With angular inertia below, low Kp turns sluggishly and high Kp
-    // overshoots - the sliders now actually change the behaviour.
+    // overshoots. The sliders now actually change the behaviour.
     const turnRate = r.pid.update(error, dt);
     r.angularVel += (turnRate - r.angularVel) * 0.35;
     let headingBefore = r.heading;

@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" style="background:#161a24;font-family:system-ui,sans-serif">
-  <text x="20" y="30" fill="#eee" font-size="22">SwarmPilot - live demo preview</text>
+  <text x="20" y="30" fill="#eee" font-size="22">SwarmPilot: live demo preview</text>
   <circle cx="400" cy="260" r="60" fill="#ef4444"/>
   <circle cx="500" cy="420" r="50" fill="#ef4444"/>
   <circle cx="640" cy="260" r="40" fill="#ef4444"/>
@@ -14,5 +14,5 @@
     <polygon points="340,350 320,365 320,335"/>
     <polygon points="380,190 360,205 360,175"/>
   </g>
-  <text x="20" y="500" fill="#aaa" font-size="14">8 robots, PID steering, obstacle avoidance - try the live demo, don't just look at this picture.</text>
+  <text x="20" y="500" fill="#aaa" font-size="14">8 robots, PID steering, obstacle avoidance, so try the live demo, don't just look at this picture.</text>
 </svg>
