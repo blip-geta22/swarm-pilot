@@ -1,4 +1,4 @@
-# 🤖 SwarmPilot — Self-Tuning Robot Swarm Simulator
+# 🤖 SwarmPilot.    Self-Tuning Robot Swarm Simulator
 
 A swarm of autonomous robots that navigates around obstacles to a target,
 steered by PID control, kept apart by flocking rules, and — the crazy part —
