@@ -29,14 +29,13 @@ the browser):
 
 | Kp | Reached | Steps | Collisions |
 |---|---|---|---|
-| 0.5 | 8/8 | ~274 | 0 |
-| 2.0 | 8/8 | ~196 | 0 |
-| 5.0 | 8/8 | ~200 | 0 |
+| 0.5 | 8/8 | ~298 | 0 |
+| 2.0 | 8/8 | ~188 | 0 |
+| 5.0 | 8/8 | ~210 | 0 |
 
-Steps vary slightly run to run because the web demo adds sensor noise.
+Steps are averaged over 5 runs. They vary run to run because the web demo adds sensor noise, Kp 0.5 varied the most (262 to 420 steps).
 
-Kp 0.5 is sluggish, Kp 2.0 is the sweet spot, Kp 5.0 overshoots and turns
-more. The sliders change behaviour, they are not just labels.
+Kp 0.5 is sluggish, Kp 2.0 is the sweet spot, Kp 5.0 turns more sharply and takes a little longer than Kp 2.0. The sliders change behaviour, they are not just labels.
 
 ## Watch it live
 

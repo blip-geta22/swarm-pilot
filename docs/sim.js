@@ -55,7 +55,7 @@ function stepSwarm(state, dt) {
     const error = wrap(desired - r.heading) + (Math.random() - 0.5) * 0.04;
     // PID output is a *desired turn rate*, not a heading jump.
     // With angular inertia below, low Kp turns sluggishly and high Kp
-    // overshoots. The sliders now actually change the behaviour.
+    // turns more sharply. The sliders now actually change the behaviour.
     const turnRate = r.pid.update(error, dt);
     r.angularVel += (turnRate - r.angularVel) * 0.35;
     let headingBefore = r.heading;
