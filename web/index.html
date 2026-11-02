@@ -1,0 +1,48 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SwarmPilot — Self-Tuning Robot Swarm</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#0f1117;color:#eee;margin:0;padding:20px;max-width:1100px;margin:auto}
+canvas{width:100%;height:520px;background:#161a24;border-radius:12px;display:block}
+.controls{display:flex;flex-wrap:wrap;gap:16px;margin:16px 0}
+label{font-size:14px;color:#aaa}input[type=range]{width:140px}
+button{background:#6366f1;color:#fff;border:0;padding:10px 18px;border-radius:8px;cursor:pointer;font-size:15px}
+.stat{font-size:18px;margin:8px 0}.card{background:#1c2130;border-radius:12px;padding:16px;margin:16px 0}
+</style></head><body>
+<h1>🤖 SwarmPilot</h1>
+<p>8 autonomous robots, PID steering, virtual lidar, obstacle avoidance, and flocking — all in your browser. Tune the PID live and watch the swarm react. Low Kp turns sluggishly, high Kp overshoots and wobbles — that's real PID behaviour, not a scripted animation.</p>
+<canvas id="c" width="1000" height="520"></canvas>
+<div class="controls">
+<label>Kp <input id="kp" type="range" min="0.5" max="5" step="0.1" value="2"> <span id="kpv">2.0</span></label>
+<label>Ki <input id="ki" type="range" min="0" max="0.3" step="0.01" value="0.05"> <span id="kiv">0.05</span></label>
+<label>Kd <input id="kd" type="range" min="0" max="1" step="0.05" value="0.3"> <span id="kdv">0.30</span></label>
+<button onclick="resetSim()">Reset swarm</button>
+<button onclick="running=!running; this.textContent=running?'Pause':'Resume'">Pause</button>
+</div>
+<div class="stat" id="stats"></div>
+<div class="card"><b>How it works:</b> each robot runs a PID controller on heading error to the target (green star). PID output is a turn rate, with angular inertia, so tuning matters. When lidar sees an obstacle ahead, the robot steers to the clear side and slows down — it goes around, it doesn't drive through. The Python version in this same repo (<code>swarm_pilot/</code>) runs the same idea headlessly, plus a genetic algorithm that evolves the best Kp/Ki/Kd automatically: <code>python -m swarm_pilot.cli tune</code>. See <code>web/test_sim.js</code> for the headless test of this exact browser physics.</div>
+<script src="sim.js"></script>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+let state=null,running=true;
+function resetSim(){
+  state=createSwarm(8,{kp:+kp.value,ki:+ki.value,kd:+kd.value},Date.now()%100000);
+  // Re-randomise spawn a little in the browser, tests use a fixed seed.
+  state.robots.forEach(r=>{r.x=20+Math.random()*80;r.y=40+Math.random()*440;});
+}
+function draw(){ctx.clearRect(0,0,1000,520);ctx.fillStyle='#22c55e';ctx.font='28px system-ui';ctx.fillText('★',TARGET.x-12,TARGET.y+10);
+ctx.fillStyle='#ef4444';for(const o of OBSTACLES){ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,7);ctx.fill()}
+for(const r of state.robots){ctx.save();ctx.translate(r.x,r.y);ctx.rotate(r.heading);ctx.fillStyle='#818cf8';ctx.beginPath();ctx.moveTo(14,0);ctx.lineTo(-10,9);ctx.lineTo(-10,-9);ctx.fill();ctx.restore()}}
+function loop(){
+  if(running){
+    // Live-update PID gains on every robot, so sliders matter mid-run.
+    state.robots.forEach(r=>{r.pid.kp=+kp.value;r.pid.ki=+ki.value;r.pid.kd=+kd.value;});
+    stepSwarm(state,0.1);
+    const reached=state.robots.filter(r=>Math.hypot(r.x-TARGET.x,r.y-TARGET.y)<60).length;
+    document.getElementById('stats').textContent=`Step ${state.steps} · ${reached}/8 at target · ${state.collisions} collisions (a hit pushes the robot out, it can't tunnel through)`;
+  }
+  draw();requestAnimationFrame(loop)}
+const kp=document.getElementById('kp'),ki=document.getElementById('ki'),kd=document.getElementById('kd');
+kp.oninput=()=>kpv.textContent=(+kp.value).toFixed(1);ki.oninput=()=>kiv.textContent=(+ki.value).toFixed(2);kd.oninput=()=>kdv.textContent=(+kd.value).toFixed(2);
+resetSim();loop();
+</script></body></html>
