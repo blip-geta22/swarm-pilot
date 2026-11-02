@@ -22,7 +22,7 @@ Measured with the Python simulator, 8 robots, same seed and target:
 
 The evolved gains cut the tuning score by 64% and collisions from 3 to 0.
 Score = total distance left + collisions × 20 + steps × 0.1, so it trades
-off distance, collisions, and time — it does not just reward speed.
+off distance, collisions, and time - it does not just reward speed.
 
 Web demo, tested headlessly with `node web/test_sim.js` (same physics as
 the browser):
@@ -36,7 +36,7 @@ the browser):
 Steps vary slightly run to run because the web demo adds sensor noise.
 
 Kp 0.5 is sluggish, Kp 2.0 is the sweet spot, Kp 5.0 overshoots and turns
-more — the sliders change behaviour, they are not just labels.
+more - the sliders change behaviour, they are not just labels.
 
 ## Watch it live
 
@@ -46,7 +46,7 @@ Drag the Kp / Ki / Kd sliders and watch the swarm react in real time.
 The browser version is a simplified visualization of the same PID and
 avoidance logic in `swarm_pilot/`. It uses turn-rate PID with integral
 clamping, sensor noise, and clear-side obstacle avoidance, and it is
-tested headlessly — it does not model full differential-drive wheel speeds.
+tested headlessly - it does not model full differential-drive wheel speeds.
 
 ## Run it
 
@@ -65,7 +65,7 @@ python -m swarm_pilot.cli tune --generations 8
 - **Control:** PID on heading error, with anti-windup and speed control
   (slow near obstacles, slow near the target)
 - **Swarm:** separation flocking so robots don't clump or collide
-- **Auto-tuner:** genetic algorithm — keep the best half of the population,
+- **Auto-tuner:** genetic algorithm - keep the best half of the population,
   average pairs of gains to cross-breed them, add Gaussian mutation, repeat.
   Score = distance left + collisions × 20 + time.
 
@@ -108,4 +108,4 @@ Kp 0.5, 2.0, and 5.0 all reach 8/8 with 0 collisions.
 
 ## License
 
-MIT — see `LICENSE`.
+MIT - see `LICENSE`.
