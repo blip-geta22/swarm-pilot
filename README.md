@@ -24,6 +24,19 @@ The evolved gains cut the tuning score by 64% and collisions from 3 to 0.
 Score = total distance left + collisions × 20 + steps × 0.1, so it trades
 off distance, collisions, and time, so it does not just reward speed.
 
+That 64% is for seed 42, the seed the tuner was run on. Across 30 different
+seeds, the picture is more mixed, and that matters more than the headline:
+
+| Gains | Mean score | Full 8/8 runs | Total collisions | Mean steps |
+|---|---|---|---|---|
+| Default (Kp=2.0, Ki=0.05, Kd=0.30) | 78.0 | 30/30 | 72 | 169 |
+| Evolved (Kp=0.18, Ki=0.217, Kd=0.45) | 60.7 | 27/30 | 23 | 299 |
+
+Evolved gains beat default gains on 23 of 30 seeds, with a mean score
+22% lower and far fewer collisions, but they are slower on average and
+miss a full 8/8 finish on 3 seeds. In short, evolved gains trade speed
+for safety. That tradeoff is the honest result, not just the seed 42 win.
+
 Web demo, tested headlessly with `node web/test_sim.js` (same physics as
 the browser):
 
