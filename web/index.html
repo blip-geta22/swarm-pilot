@@ -10,7 +10,8 @@ button{background:#6366f1;color:#fff;border:0;padding:10px 18px;border-radius:8p
 .stat{font-size:18px;margin:8px 0}.card{background:#1c2130;border-radius:12px;padding:16px;margin:16px 0}
 </style></head><body>
 <h1>🤖 SwarmPilot</h1>
-<p>8 autonomous robots, PID steering, virtual lidar, obstacle avoidance, and flocking — all in your browser. Tune the PID live and watch the swarm react. Low Kp turns sluggishly, high Kp overshoots and wobbles — that's real PID behaviour, not a scripted animation.</p>
+<p>8 autonomous robots, PID steering, virtual lidar, obstacle avoidance, and flocking — all in your browser. Tune the PID live and watch the swarm react. Low Kp turns sluggishly, high Kp overshoots and wobbles.</p>
+<p><small>This browser version is a simplified visualization of the same PID and avoidance logic in <code>swarm_pilot/</code>. It uses the same turn-rate PID with integral clamping, sensor noise, and clear-side obstacle avoidance, and it is tested headlessly in <code>web/test_sim.js</code> — it does not model full differential-drive wheel speeds.</small></p>
 <canvas id="c" width="1000" height="520"></canvas>
 <div class="controls">
 <label>Kp <input id="kp" type="range" min="0.5" max="5" step="0.1" value="2"> <span id="kpv">2.0</span></label>
@@ -20,7 +21,7 @@ button{background:#6366f1;color:#fff;border:0;padding:10px 18px;border-radius:8p
 <button onclick="running=!running; this.textContent=running?'Pause':'Resume'">Pause</button>
 </div>
 <div class="stat" id="stats"></div>
-<div class="card"><b>How it works:</b> each robot runs a PID controller on heading error to the target (green star). PID output is a turn rate, with angular inertia, so tuning matters. When lidar sees an obstacle ahead, the robot steers to the clear side and slows down — it goes around, it doesn't drive through. The Python version in this same repo (<code>swarm_pilot/</code>) runs the same idea headlessly, plus a genetic algorithm that evolves the best Kp/Ki/Kd automatically: <code>python -m swarm_pilot.cli tune</code>. See <code>web/test_sim.js</code> for the headless test of this exact browser physics.</div>
+<div class="card"><b>How it works:</b> each robot runs a PID controller on heading error to the target (green star). PID output is a turn rate, with angular inertia, so tuning matters. When lidar sees an obstacle ahead, the robot steers to the clear side and slows down — it goes around, and a contact pushes it out instead of letting it drive through. The Python version in this same repo (<code>swarm_pilot/</code>) runs the same idea headlessly, plus a genetic algorithm that evolves the best Kp/Ki/Kd automatically: <code>python -m swarm_pilot.cli tune</code>. See <code>web/test_sim.js</code> for the headless test of this exact browser physics.</div>
 <script src="sim.js"></script>
 <script>
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');

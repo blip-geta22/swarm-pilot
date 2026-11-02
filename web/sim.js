@@ -50,7 +50,9 @@ function stepSwarm(state, dt) {
   state.steps++;
   for (const r of state.robots) {
     const desired = Math.atan2(TARGET.y - r.y, TARGET.x - r.x);
-    const error = wrap(desired - r.heading);
+    // Sensor noise, like a real robot: the measured heading error is noisy,
+    // so the controller cannot rely on a perfect measurement.
+    const error = wrap(desired - r.heading) + (Math.random() - 0.5) * 0.04;
     // PID output is a *desired turn rate*, not a heading jump.
     // With angular inertia below, low Kp turns sluggishly and high Kp
     // overshoots — the sliders now actually change the behaviour.
