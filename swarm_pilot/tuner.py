@@ -32,7 +32,7 @@ def evolve(generations: int = 8, population: int = 12, seed: int = 1) -> tuple[P
         while len(children) < population - len(survivors):
             a, b = rng.choice(survivors), rng.choice(survivors)
             child = PID(
-                kp=(a.kp + b.kp) / 2 + rng.gauss(0, 0.3),
+                kp=max(0.1, (a.kp + b.kp) / 2 + rng.gauss(0, 0.3)),
                 ki=max(0, (a.ki + b.ki) / 2 + rng.gauss(0, 0.03)),
                 kd=max(0, (a.kd + b.kd) / 2 + rng.gauss(0, 0.1)),
             )
